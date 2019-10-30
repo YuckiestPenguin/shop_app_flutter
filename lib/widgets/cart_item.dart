@@ -33,18 +33,19 @@ class CartItem extends StatelessWidget {
         child: Icon(Icons.delete, color: Colors.white, size: 40),
       ),
       child: Card(
-          margin: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
-          child: Padding(
-            padding: EdgeInsets.all(8),
-            child: ListTile(
-              leading: CircleAvatar(
-                child: FittedBox(child: Text('\$$price')),
-              ),
-              title: Text(title),
-              subtitle: Text('Totla: \$${price * quantity}'),
-              trailing: Text('$quantity x'),
+        margin: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+        child: Padding(
+          padding: EdgeInsets.all(8),
+          child: ListTile(
+            leading: CircleAvatar(
+              child: FittedBox(child: Text('\$$price')),
             ),
-          )),
+            title: Text(title),
+            subtitle: Text('Totla: \$${price * quantity}'),
+            trailing: Text('$quantity x'),
+          ),
+        ),
+      ),
     );
   }
 }
