@@ -31,9 +31,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
   void _updateImageUrl() {
     if (!_imageUrlNode.hasFocus) {
-      setState(() {
-
-      });
+      setState(() {});
     }
   }
 
@@ -84,9 +82,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     child: _imageUrlController.text.isEmpty
                         ? Text('Enter Url')
                         : FittedBox(
-                      child: Image.network(_imageUrlController.text,
-                          fit: BoxFit.cover),
-                    ),
+                            child: Image.network(_imageUrlController.text,
+                                fit: BoxFit.cover),
+                          ),
                   ),
                   Expanded(
                     child: TextFormField(
@@ -95,7 +93,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       textInputAction: TextInputAction.done,
                       controller: _imageUrlController,
                       focusNode: _imageUrlNode,
-
                     ),
                   )
                 ],
