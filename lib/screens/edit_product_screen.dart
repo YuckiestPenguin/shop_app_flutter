@@ -130,6 +130,15 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       imageUrl: _editedProduct.imageUrl,
                       id: null);
                 },
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please provide a description.';
+                  }
+                  if (value.length <10) {
+                    return 'Should be at least 10 characters long';
+                  }
+                  return null;
+                },
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
