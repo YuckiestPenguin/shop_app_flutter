@@ -70,15 +70,14 @@ class Products with ChangeNotifier {
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       final List<Product> loadedProducts = [];
       extractedData.forEach((prodId, prodData) {
-        loadedProducts.add(
-            Product(
-              id: prodId,
-              title: prodData['title'],
-              price: prodData['price'],
-              description: prodData['description'],
-              imageUrl: prodData['imageUrl'],
-              isFavorite: prodData['isFavorite'],
-            ));
+        loadedProducts.add(Product(
+          id: prodId,
+          title: prodData['title'],
+          price: prodData['price'],
+          description: prodData['description'],
+          imageUrl: prodData['imageUrl'],
+          isFavorite: prodData['isFavorite'],
+        ));
       });
 
       _items = loadedProducts;
@@ -118,10 +117,26 @@ class Products with ChangeNotifier {
     }
   }
 
-  void updateProduct(String id, Product newProduct) {
+  Future<void> updateProduct(String id, Product newProduct) async {
+    final url =
+        'https://flutter-shop-app-3e8c3.firebaseio.com/products/$id.json';
     final prodIndex = _items.indexWhere((prod) => prod.id == id);
-    _items[prodIndex] = newProduct;
-    notifyListeners();
+
+    if (prodIndex >= 0) {
+      await http.patch(
+        url,
+        body: json.encode({
+          'title': newProduct.title,
+          'description': newProduct.description,
+          'price': newProduct.price,
+          'imageUrl': newProduct.imageUrl,
+        }),
+      );
+      _items[prodIndex] = newProduct;
+      notifyListeners();
+    } else {
+      print('...');
+    }
   }
 
   void deleteProduct(String id) {
