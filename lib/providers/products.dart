@@ -63,9 +63,9 @@ class Products with ChangeNotifier {
     notifyListeners();
   }
 
-  void addProduct(Product product) {
+  Future<void> addProduct(Product product) {
     const url = 'https://flutter-shop-app-3e8c3.firebaseio.com/products.json';
-    http
+    return http
         .post(
       url,
       body: json.encode({
