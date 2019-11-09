@@ -35,7 +35,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                   _showOnlyFavorites = false;
                 }
               });
-
             },
             icon: Icon(Icons.more_vert),
             itemBuilder: (_) => [
