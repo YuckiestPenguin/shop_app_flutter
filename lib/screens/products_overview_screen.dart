@@ -36,7 +36,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                 }
               });
 
-              print(selectedValue);
             },
             icon: Icon(Icons.more_vert),
             itemBuilder: (_) => [

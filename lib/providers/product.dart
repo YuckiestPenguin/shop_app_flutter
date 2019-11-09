@@ -19,7 +19,6 @@ class Product with ChangeNotifier {
 
   void toggleFavoriteProduct() {
     isFavorite = !isFavorite;
-    print(isFavorite);
     notifyListeners();
   }
 }
