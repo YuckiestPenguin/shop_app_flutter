@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../providers/auth.dart';
 
 enum AuthMode { Signup, Login }
@@ -11,9 +12,7 @@ class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final deviceSize = MediaQuery
-        .of(context)
-        .size;
+    final deviceSize = MediaQuery.of(context).size;
     // final transformConfig = Matrix4.rotationZ(-8 * pi / 180);
     // transformConfig.translate(-10.0);
     return Scaffold(
@@ -41,36 +40,36 @@ class AuthScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-//                  Flexible(
-//                    child: Container(
-//                      margin: EdgeInsets.only(bottom: 20.0),
-//                      padding:
-//                          EdgeInsets.symmetric(vertical: 8.0, horizontal: 94.0),
-//                      transform: Matrix4.rotationZ(-8 * pi / 180)
-//                        ..translate(-10.0),
-//                      // ..translate(-10.0),
-//                      decoration: BoxDecoration(
-//                        borderRadius: BorderRadius.circular(20),
-//                        color: Colors.deepOrange.shade900,
-//                        boxShadow: [
-//                          BoxShadow(
-//                            blurRadius: 8,
-//                            color: Colors.black26,
-//                            offset: Offset(0, 2),
-//                          )
-//                        ],
-//                      ),
-//                      child: Text(
-//                        'MyShop',
-//                        style: TextStyle(
-//                          color: Theme.of(context).accentTextTheme.title.color,
-//                          fontSize: 50,
-//                          fontFamily: 'Anton',
-//                          fontWeight: FontWeight.normal,
-//                        ),
-//                      ),
-//                    ),
-//                  ),
+                  Flexible(
+                    child: Container(
+                      margin: EdgeInsets.only(bottom: 20.0),
+                      padding:
+                      EdgeInsets.symmetric(vertical: 8.0, horizontal: 94.0),
+                      transform: Matrix4.rotationZ(-8 * pi / 180)
+                        ..translate(-10.0),
+                      // ..translate(-10.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.deepOrange.shade900,
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 8,
+                            color: Colors.black26,
+                            offset: Offset(0, 2),
+                          )
+                        ],
+                      ),
+                      child: Text(
+                        'MyShop',
+                        style: TextStyle(
+                          color: Theme.of(context).accentTextTheme.title.color,
+                          fontSize: 50,
+                          fontFamily: 'Anton',
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ),
+                  ),
                   Flexible(
                     flex: deviceSize.width > 600 ? 2 : 1,
                     child: AuthCard(),
@@ -115,10 +114,16 @@ class _AuthCardState extends State<AuthCard> {
     });
     if (_authMode == AuthMode.Login) {
       // Log user in
+      await Provider.of<Auth>(context, listen: false).login(
+        _authData['email'],
+        _authData['password'],
+      );
     } else {
       // Sign user up
       await Provider.of<Auth>(context, listen: false).signup(
-          _authData['email'], _authData['password']);
+        _authData['email'],
+        _authData['password'],
+      );
     }
     setState(() {
       _isLoading = false;
@@ -139,9 +144,7 @@ class _AuthCardState extends State<AuthCard> {
 
   @override
   Widget build(BuildContext context) {
-    final deviceSize = MediaQuery
-        .of(context)
-        .size;
+    final deviceSize = MediaQuery.of(context).size;
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
@@ -211,26 +214,16 @@ class _AuthCardState extends State<AuthCard> {
                     ),
                     padding:
                     EdgeInsets.symmetric(horizontal: 30.0, vertical: 8.0),
-                    color: Theme
-                        .of(context)
-                        .primaryColor,
-                    textColor: Theme
-                        .of(context)
-                        .primaryTextTheme
-                        .button
-                        .color,
+                    color: Theme.of(context).primaryColor,
+                    textColor: Theme.of(context).primaryTextTheme.button.color,
                   ),
                 FlatButton(
                   child: Text(
-                      '${_authMode == AuthMode.Login
-                          ? 'SIGNUP'
-                          : 'LOGIN'} INSTEAD'),
+                      '${_authMode == AuthMode.Login ? 'SIGNUP' : 'LOGIN'} INSTEAD'),
                   onPressed: _switchAuthMode,
                   padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 4),
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  textColor: Theme
-                      .of(context)
-                      .primaryColor,
+                  textColor: Theme.of(context).primaryColor,
                 ),
               ],
             ),
