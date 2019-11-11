@@ -29,7 +29,7 @@ class Auth with ChangeNotifier {
         throw HttpException(responseData['error']['message']);
       }
     } catch (error) {
-      print(json.decode(error))
+      print(json.decode(error));
       throw error;
     }
   }
