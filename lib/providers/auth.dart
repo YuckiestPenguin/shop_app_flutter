@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+
 import '../models/http_exception.dart';
 
 class Auth with ChangeNotifier {
@@ -25,11 +26,10 @@ class Auth with ChangeNotifier {
         ),
       );
       final responseData = json.decode(response.body);
-      if (responseData['data'] != null) {
+      if (responseData['error'] != null) {
         throw HttpException(responseData['error']['message']);
       }
     } catch (error) {
-      print(json.decode(error));
       throw error;
     }
   }
